@@ -1,0 +1,207 @@
+package tictactoe;
+import java.util.Scanner;
+ public class Main {
+    public static void main(String[] args) {
+        // write your code here
+        Scanner sc=new Scanner(System.in);
+
+
+
+    int cntplay=0;
+        String s="_________";
+
+        char [][]arr=new char[3][3];
+        int cnt=-1;
+        for(int i=0;i<s.length();i++)
+        {
+
+            if(i%3==0){cnt++;}
+            arr[cnt][i%3]=s.charAt(i);
+
+
+        }
+
+
+
+        char ch1;
+boolean flagplay=false;
+
+        while(!flagplay) {
+            //sc.close();
+            cntplay++;
+            if (cntplay % 2 == 0) {
+                ch1 = 'O';
+            } else {
+                ch1 = 'X';
+            }
+
+            //Scanner sc=new Scanner(System.in);
+            // String s=sc.next();
+            int cntx1 = 0, cntx2 = 0, cntsp = 0;
+
+
+            boolean flagx = false;
+
+            String s4 = "";
+            int cntofx = 0, cntofo = 0;
+            int s5 = 0;
+            for (int i = 0; i < 3; i++) {
+                String s1 = "", s2 = "";
+                String s3 = "";
+
+                for (int j = 0; j < 3; j++) {
+                    s1 += arr[i][j];
+                    s2 += arr[j][i];
+
+                }
+                s4 += arr[i][i];
+
+                if (s1.equals("XXX")) {
+                    cntx1++;
+                } else if (s1.equals("OOO")) {
+                    cntx2++;
+                } else {
+                    for (int ie = 0; ie < 3; ie++) {
+
+                        if (s1.charAt(ie) == '_') {
+                            cntsp++;
+
+                            break;
+                        }
+                    }
+
+                    for (int ie = 0; ie < 3; ie++) {
+                        if (s1.charAt(ie) == 'X') {
+                            cntofx++;
+                        }
+                        if (s1.charAt(ie) == 'O') {
+                            cntofo++;
+                        }
+                    }
+
+
+                }
+                if (s2.equals("XXX")) {
+                    cntx1++;
+                } else if (s2.equals("OOO")) {
+                    cntx2++;
+                } else {//boolean flag=false;
+                    for (int ie = 0; ie < 3; ie++) {
+                        if (s2.charAt(ie) == '_') {
+                            cntsp++;
+                            //   flag=true;
+                            break;
+                        }
+                    }
+
+
+                }
+
+            }
+            //   System.out.println(cntsp);
+            s5 += (arr[0][2] + arr[1][1] + arr[2][0]);
+
+            //System.out.println(s5);//
+            if (s4.equals("OOO")) {
+                cntx2++;
+            } else if (s4.equals("XXX")) {
+                cntx1++;
+            }
+
+
+            if (s5 == (237)) {
+                cntx2++;
+            } else if (s5 == 264) {
+                cntx1++;
+            }
+            boolean flagcor = false;
+
+          //   System.out.println(cntx1+""+cntx2);
+          //  System.out.println(cntofx+" "+cntofo);
+            System.out.println("---------");
+
+            for (int i = 0; i < 3; i++) {
+
+                System.out.print("| ");
+
+                for (int j = 0; j < 3; j++) {
+
+                    System.out.print(arr[i][j] + " ");
+
+
+                }
+                System.out.print("|");
+                System.out.println();
+            }
+            System.out.println("---------");
+
+            if (cntx1 > 0 && cntx2 > 0) {
+                System.out.println("Impossible");
+            } else if (cntx1 > 0) {
+                System.out.println("X wins");
+                flagplay = true;
+
+                flagcor=true;
+                break;
+            } else if (cntx2 > 0) {
+                System.out.println("O wins");
+                flagplay = true;
+                flagcor=true;
+                break;
+            } else if (Math.abs(cntofx - cntofo) >= 2 && cntsp > 0) {
+                System.out.println("Impossible");
+            } else if (cntx1 < 1 && cntx2 < 1 && cntsp > 0) {
+                System.out.println("Game not finished");
+            } else if (cntx1 < 1 && cntx2 < 1 && cntsp < 1) {
+                System.out.println("Draw");
+                flagplay = true;
+                flagcor=true;
+                break;
+            } else {
+                //System.out.println("Impossible");
+            }
+
+
+            //////2nd part of code THIS IS FuTuRe;
+
+
+
+
+
+            int cor1;
+            int cor2;
+
+
+
+            while (!flagcor) {
+                try {
+                    System.out.print("Enter the cordinates: ");
+                    cor1 = sc.nextInt();
+                    cor2 = sc.nextInt();
+
+                    if ((cor1 <= 3 && cor1 >= 1) && (cor2 <= 3 && cor2 >= 1)) {
+                        flagcor = true;
+
+
+                        if (arr[cor1 - 1][cor2 - 1] != '_') {
+                            System.out.println("This cell is occupied! Choose another one!");
+                            flagcor = false;
+                        } else {
+                            //  flagcor = true;
+                            arr[cor1 - 1][cor2 - 1] = ch1;
+                        }
+                    }
+
+
+                } catch (Exception ee) {
+                    System.out.println("You should enter numbers!");
+                }
+
+
+            }
+
+
+        }
+
+    }
+}
